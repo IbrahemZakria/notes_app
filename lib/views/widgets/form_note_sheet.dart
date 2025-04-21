@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes_app/Constant.dart';
 import 'package:notes_app/component/custome_button.dart';
 import 'package:notes_app/component/custome_text_form_field.dart';
+import 'package:notes_app/cubits/cubit/add_note_cubit.dart';
+import 'package:notes_app/helper/component/UserMessage.dart';
+import 'package:notes_app/models/note_model.dart';
 
 class FormNoteSheet extends StatefulWidget {
   const FormNoteSheet({super.key});
@@ -57,11 +61,30 @@ class _FormNoteSheetState extends State<FormNoteSheet> {
           SizedBox(height: 24),
           CustomeButton(
             textbutton: 'Add Note',
-            onPressed: () {
+            onPressed: () async {
               if (formKey.currentState!.validate()) {
                 formKey.currentState!.save();
-
-                Navigator.pop(context);
+                NoteModel note = NoteModel(
+                  title: title!,
+                  content: description!,
+                  dateCreated: DateTime.now().toString(),
+                  color: kprimaryColor.value,
+                );
+                await BlocProvider.of<AddNoteCubit>(context).addnotes(note);
+                if (BlocProvider.of<AddNoteCubit>(context).state
+                    is AddNoteSuccessState) {
+                  Navigator.pop(context);
+                  Usermessage.show(
+                    message: 'Note added successfully',
+                    backgroundColor: kprimaryColor,
+                  );
+                } else if (BlocProvider.of<AddNoteCubit>(context).state
+                    is AddNoteErrorState) {
+                  Usermessage.show(
+                    message: 'Failed to add note , please try again',
+                    backgroundColor: Colors.red,
+                  );
+                }
               } else {
                 setState(() {
                   autovalidateMode = AutovalidateMode.always;
