@@ -2,17 +2,20 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class CustomeTextFormField extends StatelessWidget {
-  CustomeTextFormField.CustomeTextformField(
-      {this.obscureText = false,
-      this.hintText,
-      this.onSaved,
-      this.prefixIcon,
-      this.suffixIcon,
-      this.validator,
-      this.textColor = Colors.white,
-      this.controller,
-      this.bordercolor = Colors.white});
-
+  CustomeTextFormField.CustomeTextformField({
+    this.obscureText = false,
+    this.hintText,
+    this.onSaved,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.validator,
+    this.textColor = Colors.white,
+    this.controller,
+    this.borderRadius,
+    this.maxLines,
+    this.bordercolor = Colors.white,
+  });
+  double? borderRadius;
   String? hintText;
   String? Function(String?)? validator;
   Function(String)? onSaved;
@@ -22,6 +25,7 @@ class CustomeTextFormField extends StatelessWidget {
   Color bordercolor;
   Color? textColor;
   TextEditingController? controller;
+  int? maxLines;
 
   @override
   Widget build(BuildContext context) {
@@ -33,26 +37,20 @@ class CustomeTextFormField extends StatelessWidget {
           return validator != null ? validator!(value) : null;
         },
         onChanged: onSaved,
-        style: TextStyle(
-          color: textColor,
-        ),
+        maxLines: maxLines ?? 1,
+        style: TextStyle(color: textColor),
         obscureText: obscureText,
         decoration: InputDecoration(
           suffixIcon: suffixIcon,
           prefixIcon: prefixIcon,
           hintText: hintText ?? '',
-          hintStyle: TextStyle(
-            color: textColor,
-          ),
+          hintStyle: TextStyle(color: textColor),
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: bordercolor,
-            ),
+            borderRadius: BorderRadius.circular(borderRadius ?? 12),
+            borderSide: BorderSide(color: bordercolor),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.white,
-            ),
+            borderSide: BorderSide(color: Colors.white),
           ),
         ),
       ),

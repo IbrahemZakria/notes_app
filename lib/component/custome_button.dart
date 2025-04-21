@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 
 class CustomeButton extends StatelessWidget {
-  const CustomeButton({super.key, this.onPressed, required this.textbutton});
+  const CustomeButton({
+    super.key,
+    this.onPressed,
+    required this.textbutton,
+    this.color,
+  });
   final Function()? onPressed;
   final String textbutton;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -14,17 +20,14 @@ class CustomeButton extends StatelessWidget {
         width: double.infinity,
         height: MediaQuery.of(context).size.height * 0.08,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: color ?? Colors.white,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
             textbutton,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 24,
-            ),
+            style: TextStyle(color: Colors.black, fontSize: 24),
           ),
         ),
       ),
