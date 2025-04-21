@@ -54,7 +54,10 @@ class CustomeTextFormField extends StatelessWidget {
           hintText: hintText ?? '',
           hintStyle: TextStyle(color: textColor),
           enabledBorder: buildborder(),
+
+          errorBorder: buildborder(bordercolor: Colors.red),
           focusedBorder: buildborder(bordercolor: kprimaryColor),
+          focusedErrorBorder: buildborder(bordercolor: kprimaryColor),
         ),
       ),
     );

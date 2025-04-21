@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app/Constant.dart';
-import 'package:notes_app/component/custome_button.dart';
-import 'package:notes_app/component/custome_text_form_field.dart';
+import 'package:notes_app/views/widgets/form_note_sheet.dart';
 
 class ShowAddNotesSheet extends StatelessWidget {
   const ShowAddNotesSheet({super.key});
@@ -11,30 +9,7 @@ class ShowAddNotesSheet extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(top: 24, left: 16, right: 16),
       height: MediaQuery.of(context).size.height * 0.55,
-      child: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              CustomeTextFormField.CustomeTextformField(
-                hintText: 'Title',
-                borderRadius: 16,
-              ),
-              SizedBox(height: 16),
-              CustomeTextFormField.CustomeTextformField(
-                hintText: 'Description',
-                borderRadius: 16,
-                maxLines: 5,
-              ),
-              SizedBox(height: 24),
-              CustomeButton(
-                textbutton: 'Add Note',
-                onPressed: () {},
-                color: kprimaryColor,
-              ),
-            ],
-          ),
-        ),
-      ),
+      child: Center(child: SingleChildScrollView(child: FormNoteSheet())),
     );
   }
 }
