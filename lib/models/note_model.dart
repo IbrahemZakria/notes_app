@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart' show Color;
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hive/hive.dart';
 part 'note_model.g.dart';

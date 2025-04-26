@@ -4,12 +4,14 @@ class CustomeButton extends StatelessWidget {
   const CustomeButton({
     super.key,
     this.onPressed,
-    required this.textbutton,
+    // required this.textbutton,
+    required this.icon,
     this.color,
   });
   final Function()? onPressed;
-  final String textbutton;
+  // final String textbutton;
   final Color? color;
+  final Widget icon;
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +25,7 @@ class CustomeButton extends StatelessWidget {
           color: color ?? Colors.white,
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            textbutton,
-            style: TextStyle(color: Colors.black, fontSize: 24),
-          ),
-        ),
+        child: Padding(padding: const EdgeInsets.all(8.0), child: icon),
       ),
     );
   }

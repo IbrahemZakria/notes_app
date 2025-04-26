@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes_app/cubits/get_notes_cubit/get_notes_cubit.dart';
+import 'package:notes_app/models/note_model.dart';
 
 class NoteItem extends StatelessWidget {
-  const NoteItem({required this.color, super.key, this.onTap});
+  const NoteItem({
+    required this.color,
+    required this.notesmodel,
+    super.key,
+    this.onTap,
+  });
+  final NoteModel notesmodel;
   final Color color;
+
   final Function()? onTap;
 
   @override
@@ -13,15 +23,15 @@ class NoteItem extends StatelessWidget {
         margin: EdgeInsets.only(top: 16),
         height: MediaQuery.of(context).size.height * 0.25,
         decoration: BoxDecoration(
-          color: color,
+          color: Color(notesmodel.color),
           borderRadius: BorderRadius.circular(12),
         ),
-        child: const Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             ListTile(
               title: Text(
-                'Flutter Note',
+                notesmodel.title,
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -29,17 +39,26 @@ class NoteItem extends StatelessWidget {
                 ),
               ),
               subtitle: Text(
-                'This is a note description.ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd',
+                notesmodel.content,
                 style: TextStyle(fontSize: 16, color: Colors.black),
               ),
-              trailing: Icon(Icons.delete, color: Colors.red, size: 30),
+              trailing: IconButton(
+                onPressed: () {
+                  notesmodel.delete();
+                  BlocProvider.of<GetNotesCubit>(context).getNotes();
+                },
+                icon: Icon(Icons.delete, color: Colors.red, size: 30),
+              ),
             ),
             Padding(
               padding: EdgeInsets.all(16.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Text('12/12/2023', style: TextStyle(color: Colors.black54)),
+                  Text(
+                    notesmodel.dateCreated,
+                    style: TextStyle(color: Colors.black54),
+                  ),
                 ],
               ),
             ),
