@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -6,6 +8,7 @@ import 'package:notes_app/cubits/add_notes_cubit/add_note_cubit.dart';
 import 'package:notes_app/cubits/app_bloc_observer.dart';
 import 'package:notes_app/cubits/get_notes_cubit/get_notes_cubit.dart';
 import 'package:notes_app/models/note_model.dart';
+import 'package:notes_app/views/edit_notes_view.dart';
 import 'package:notes_app/views/notes_view.dart';
 
 void main() async {
@@ -36,7 +39,10 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(brightness: Brightness.dark),
-        routes: {NotesView.routeName: (context) => NotesView()},
+        routes: {
+          NotesView.routeName: (context) => NotesView(),
+          EditNotesView.routeName: (context) => EditNotesView(),
+        },
         initialRoute: NotesView.routeName,
       ),
     );

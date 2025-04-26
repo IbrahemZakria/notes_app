@@ -63,14 +63,12 @@ class NotesListview extends StatelessWidget {
 
               color: colors[index],
               onTap: () {
-                Navigator.push(
+                Navigator.pushNamed(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return EditNotesView();
-                    },
-                  ),
+                  EditNotesView.routeName,
+                  arguments: notes[index],
                 );
+                //
               },
             );
           },
